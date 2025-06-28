@@ -403,7 +403,7 @@ const MultiStepForm = () => {
       setIsSubmitting(true);
       toast.info("Creating your user account...");
 
-      const API_BASE_URL = "http://machine.travelninja.pk/api/v1";
+      const API_BASE_URL = "https://machine.travelninja.pk/api/v1";
 
       // Step 1: Create the user
       const userRegisterResponse = await fetch(
