@@ -472,7 +472,8 @@ const MultiStepForm = () => {
       toast.success("Supplier registered successfully!");
 
       setTimeout(() => {
-        setCurrentStep(4); // Success screen
+        const totalSteps = getStepsForUserType(userType);
+        setCurrentStep(totalSteps); // Set to final step
         setIsSubmitting(false);
       }, 1500);
     } catch (error: any) {
@@ -482,7 +483,7 @@ const MultiStepForm = () => {
     }
   };
   const isRegistrationComplete =
-    localStorage.getItem("registration_complete") === "false";
+    localStorage.getItem("registration_complete") === "true";
 
   const handleNext = () => {
     const totalSteps = getStepsForUserType(userType);
@@ -818,7 +819,8 @@ const MultiStepForm = () => {
                 className="w-full bg-blue-600 text-white py-3 px-6 rounded-lg font-semibold hover:bg-blue-700 transition-colors"
                 onClick={() => {
                   toast.success("Redirecting to dashboard...");
-                  // navigate("/dashboard");
+                  window.location.href =
+                    "https://supplier-dashboard-ljr1-git-main-jaikumarsuthers-projects.vercel.app/";
                 }}
               >
                 Log in to dashboard
@@ -833,7 +835,11 @@ const MultiStepForm = () => {
   return (
     <div className="min-h-screen bg-[#f1f5f8]  ">
       <div className="flex justify-center items-center py-4 bg-white">
-        <img src={logo} alt="logo" className="w-[120px] sm:w-[150px] object-contain" />
+        <img
+          src={logo}
+          alt="logo"
+          className="w-[120px] sm:w-[150px] object-contain"
+        />
       </div>
       <div className="flex justify-center items-center px-4">
         <div className="w-full max-w-[480px] py-8">
@@ -845,7 +851,6 @@ const MultiStepForm = () => {
 
           <div className="bg-white rounded-xl shadow-sm p-8 w-full max-w-[470px]">
             {userType && <ProgressBar />}
-
 
             {/* Step 0: Business Type Selection */}
             {currentStep === 0 && (
@@ -950,7 +955,6 @@ const MultiStepForm = () => {
                     label="Phone Number"
                     value={formData.phone}
                     onChange={(value: any) => updateFormData("phone", value)}
-       
                   />
                   <div className="form-group">
                     <label className="text-[#283456] text-base sm:text-lg font-semibold mt-[17px]">
